@@ -1,36 +1,59 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+    مجلد src/
+/my-lms-project
+├── node_modules/
+├── public/                # صور، أيقونات، ملفات ثابتة (Favicons, assets)
+├── src/
+│   ├── app/               # App Router: ملفات الـ pages والـ layouts
+│   ├── components/        # المكونات القابلة لإعادة الاستخدام (Reusable UI Components)
+│   ├── lib/               # (Library/Utilities) الكود المنطقي (Business Logic)، الخدمات، الدوال 
+│   ├── types/             # تعريفات TypeScript العامة (Global Types/Interfaces)
+│   ├── styles/            # ملفات الـ CSS/Sass/Tailwind
+│   └── hooks/             # الـ React Hooks المخصصة (Custom Hooks)
+├── .env.local             # متغيرات البيئة
+├── next.config.js
+├── package.json
+├── tsconfig.json
+└── ...
 
-## Getting Started
 
-First, run the development server:
+تقسيم جزء الـ app/
+/src/app
+├── (student)/             # مجموعة مسارات الطالب
+│   ├── dashboard/         # /dashboard - الصفحة الرئيسية للطالب
+│   │   └── page.tsx
+│   ├── courses/           # /courses
+│   ├── exams/             # /exams
+│   ├── profile/           # /profile
+│   └── layout.tsx         # Layout مخصص لصفحات الطالب (Student Layout)
+├── (teacher)/             # مجموعة مسارات المدرس
+│   ├── dashboard/         # /dashboard/teacher - (أو /teacher/dashboard إذا لم تستخدم المجموعات)
+│   ├── courses/manage/    # لرفع وإدارة الكورسات
+│   ├── students/          # لتقييمات الطلاب وإدارة الجروبات
+│   ├── analytics/         # تقارير المدرس
+│   └── layout.tsx         # Layout مخصص لصفحات المدرس (Teacher Dashboard Layout)
+├── login/
+├── register/
+├── page.tsx               # الصفحة الرئيسية للمنصة (Home Page)
+├── layout.tsx             # Layout العام (Root Layout)
+└── middleware.ts          # لتوجيه المستخدمين بناءً على الدور (مثلاً: التحقق من الصلاحيات)
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+تنظيم الـ Components
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+/src/components
+├── ui/                    # المكونات الذرية (Atomic) - (Button, Input, Card, Modal)
+├── common/                # المكونات المشتركة بين كل التطبيق (Header, Footer, Navigation)
+├── student/               # مكونات خاصة بواجهة الطالب (StudentVideoPlayer, ExamHistory)
+├── teacher/               # مكونات خاصة بواجهة المدرس (CourseUploadForm, StudentRatingChart)
+└── layouts/
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
 
-## Learn More
+/src/lib
+├── api/                   # طبقة خدمات API (API Service Layer)
+│   ├── courseService.ts   # دوال لاستدعاء الـ API الخاص بالكورسات (fetchCourses, createCourse)
+│   ├── studentService.ts  # دوال لاستدعاء الـ API الخاص بالطالب
+│   └── teacherService.ts  # دوال لاستدعاء الـ API الخاص بالمدرس
+├── utils/                 # دوال مساعدة عامة (Formatters, Validators, Date Helpers)
+├── auth/                  # منطق المصادقة (Authentication) (Sign-in, Sign-out)
+└── z-schema/
 
-To learn more about Next.js, take a look at the following resources:
-
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
